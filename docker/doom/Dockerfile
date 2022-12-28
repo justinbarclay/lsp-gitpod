@@ -4,6 +4,8 @@ USER gitpod
 
 # Doom
 ## Clone and set the DOOMDIR folder
+RUN sudo apt-get update
+RUN sudo apt-get install postgresql-client
 
 RUN git clone --depth 1 https://github.com/hlissner/doom-emacs /home/gitpod/doom/ --branch develop
 COPY configs /home/gitpod/.config/doom
