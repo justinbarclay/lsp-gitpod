@@ -57,7 +57,7 @@ docker push justinbarclay/gitpod-spacemacs:$spacemacs_version
 ** Default
 #+NAME: default-version
 #+BEGIN_EXAMPLE
-1.0.0
+1.0.1
 #+END_EXAMPLE
 
 #+begin_src bash :var spacemacs_version=spacemacs-version :var doom_version=doom-version 
