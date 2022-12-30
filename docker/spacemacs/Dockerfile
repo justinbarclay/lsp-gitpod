@@ -1,4 +1,4 @@
-FROM yyoncho/gitpod-base:1.0.9
+FROM justinbarclay/gitpod-base:1.0.0
 
 USER gitpod
 

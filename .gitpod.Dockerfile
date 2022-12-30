@@ -1,1 +1,1 @@
-FROM yyoncho/gitpod-default:1.1.3
+FROM justinbarclay/gitpod-default:1.0.0

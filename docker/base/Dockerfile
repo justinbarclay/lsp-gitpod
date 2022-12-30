@@ -3,13 +3,23 @@ FROM gitpod/workspace-full
 USER gitpod
 WORKDIR /home/gitpod
 
-RUN sudo apt-get update && sudo apt-get install -y build-essential git autoconf texinfo libgnutls28-dev libxml2-dev libncurses5-dev libjansson-dev libgtk-3-dev:amd64 libgccjit-9-dev
+RUN sudo apt-get update && sudo apt-get install -y build-essential\
+    git \
+    autoconf \
+    texinfo \
+    libgnutls28-dev \
+    libxml2-dev \
+    libncurses5-dev \
+    libjansson-dev \
+    libgtk-3-dev:amd64 \
+    libgccjit-9-dev \
+    postgresql-client
 
-RUN git clone https://github.com/emacs-mirror/emacs --depth 1 --branch feature/pgtk
+RUN git clone https://github.com/emacs-mirror/emacs --depth 1
 
 WORKDIR /home/gitpod/emacs/
 RUN ./autogen.sh
-RUN ./configure --with-pgtk --with-cairo --with-modules --with-native-compilation --with-json
+RUN ./configure --with-cairo --with-pgtk --with-modules --with-native-compilation --with-json
 RUN NATIVE_FULL_AOT=1 make -j8
 
 RUN sudo apt-get update && sudo apt-get install -y ripgrep fasd  libtool-bin

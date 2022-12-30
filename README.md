@@ -7,7 +7,7 @@
 Open the following url:
 
 ```
-https://gitpod.io/#ORG=emacs-lsp,PROJECT=demo-projects,PROFILE=vanilla/https://github.com/emacs-lsp/lsp-gitpod
+https://gitpod.io/#ORG=emacs-lsp,PROJECT=demo-projects,PROFILE=vanilla/https://github.com/justinbarclay/lsp-gitpod
 ```
 
 You can replace `PROJECT` and `URL` with any `github` project. Once you login you will see `VScode` editor and after a separate browser tab will pop up with Emacs in it(if you have your popups disabled, you can prefix the `VScode` url with `8085-` but make sure you keep the `VScode` tab open).
