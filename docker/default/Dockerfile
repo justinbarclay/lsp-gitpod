@@ -5,7 +5,7 @@ RUN mv .emacs.d vanilla
 COPY .emacs-profiles.el /home/gitpod/.emacs-profiles.el
 RUN git clone --depth 1 https://github.com/plexus/chemacs2 /home/gitpod/.emacs.d/
 
-COPY --from='justinbarclay/gitpod-doom:1.0.0' /home/gitpod/doom /doom
+COPY --from='justinbarclay/gitpod-doom:1.0.0' /home/gitpod/doom /home/gitpod/doom
 
 # COPY --from=yyoncho/gitpod-spacemacs:1.0.12 /home/gitpod/.emacs.d /home/gitpod/spacemacs
 # COPY --from=yyoncho/gitpod-spacemacs:1.0.12 /home/gitpod/.spacemacs.d /home/gitpod/.spacemacs.d
