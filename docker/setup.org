@@ -57,7 +57,7 @@ docker push justinbarclay/gitpod-spacemacs:$spacemacs_version
 ** Default
 #+NAME: default-version
 #+BEGIN_EXAMPLE
-1.0.1
+1.0.2-alpha
 #+END_EXAMPLE
 
 #+begin_src bash :var spacemacs_version=spacemacs-version :var doom_version=doom-version 
@@ -77,4 +77,5 @@ docker build ./default -t gitpod-default
 docker tag gitpod-default justinbarclay/gitpod-default:$default_version
 docker push justinbarclay/gitpod-default:$default_version
 #+end_src
+
 
