@@ -22,9 +22,6 @@ USER gitpod
 
 # RUN ln -s /home/gitpod/spacemacs/eln-cache /home/gitpod/.emacs.d/
 
-COPY .bashrc-ex /home/gitpod/.bashrc-ex
-RUN echo 'source ~/.bashrc-ex' >> ~/.bashrc
-
 COPY --from='justinbarclay/gitpod-doom:1.0.0' /home/gitpod/.config/doom /home/gitpod/.config/doom
 
 COPY startup.el /home/gitpod/
