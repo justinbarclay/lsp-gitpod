@@ -12,8 +12,9 @@ if [ ! -z FILE ]
 then
   FULL_FILE_LOCATION=/workspace/$PROJECT/$FILE
 fi
+
 pid=$(pidof emacs)
 if [ -z $pid ]
 then
-    GDK_BACKEND=broadway BROADWAY_DISPLAY=:5 /home/gitpod/emacs/src/emacs --with-profile ${PROFILE:-vanilla} ${FULL_FILE_LOCATION} &
+    GDK_BACKEND=broadway BROADWAY_DISPLAY=:5 /home/gitpod/emacs/src/emacs --with-profile -mm ${PROFILE:-vanilla} ${FULL_FILE_LOCATION} &
 fi
