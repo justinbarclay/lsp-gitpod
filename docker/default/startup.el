@@ -30,8 +30,8 @@
 
 (defvar magit-clone-set-remote.pushDefault)
 
-(defun startup-handle-project-dir (directory)
-  (find-file directory)
+(defun startup-handle-project-dir (directory &optional file)
+  (find-file (concat directory (or file "")))
   (require 'lsp-mode)
   (if-let (workspaces (directory-files directory t ".*\.code-workspace" ))
       (progn

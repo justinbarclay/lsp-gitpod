@@ -4,7 +4,7 @@ USER gitpod
 
 # Doom
 ## Clone and set the DOOMDIR folder
-RUN git clone --depth 1 https://github.com/hlissner/doom-emacs /home/gitpod/doom/ --branch develop
+RUN git clone https://github.com/hlissner/doom-emacs /home/gitpod/doom/
 COPY configs /home/gitpod/.config/doom
 
 ## Sync to install modules and packages

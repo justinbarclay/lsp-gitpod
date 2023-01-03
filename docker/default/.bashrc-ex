@@ -16,5 +16,5 @@ fi
 pid=$(pidof emacs)
 if [ -z $pid ]
 then
-    GDK_BACKEND=broadway BROADWAY_DISPLAY=:5 /home/gitpod/emacs/src/emacs --with-profile -mm ${PROFILE:-vanilla} ${FULL_FILE_LOCATION} &
+    GDK_BACKEND=broadway BROADWAY_DISPLAY=:5 /home/gitpod/emacs/src/emacs --with-profile -mm ${PROFILE:-vanilla} &
 fi
