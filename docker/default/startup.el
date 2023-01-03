@@ -31,7 +31,7 @@
 (defvar magit-clone-set-remote.pushDefault)
 
 (defun startup-handle-project-dir (directory &optional file)
-  (find-file (concat directory (or file "")))
+  (find-file (concat directory "/" (or file "")))
   (require 'lsp-mode)
   (if-let (workspaces (directory-files directory t ".*\.code-workspace" ))
       (progn
@@ -43,6 +43,7 @@
 
 (let* ((org (getenv "ORG"))
        (project (getenv "PROJECT"))
+       (file (getenv "FILE"))
        (root (f-parent (getenv "GITPOD_REPO_ROOT")))
        (directory (expand-file-name project root)))
   (when (and org project)
@@ -63,7 +64,7 @@
                       (= (process-exit-status process) 0))
              (let ((default-directory directory))
                (magit-remote-unset-head "origin")))
-           (startup-handle-project-dir directory)))))))
+           (startup-handle-project-dir directory file)))))))
 
 (provide 'startup)
 ;;; startup.el ends here
