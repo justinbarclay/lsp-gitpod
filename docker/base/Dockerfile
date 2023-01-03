@@ -15,7 +15,7 @@ RUN sudo apt-get update && sudo apt-get install -y build-essential\
     libgccjit-9-dev \
     postgresql-client
 
-RUN git clone https://github.com/emacs-mirror/emacs --depth 1
+RUN git clone https://github.com/emacs-mirror/emacs --depth 1 --branch emacs-29
 
 WORKDIR /home/gitpod/emacs/
 RUN ./autogen.sh

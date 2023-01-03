@@ -1,9 +1,9 @@
 * To Release a new version
 This is probably best run using ~ob-async~
 #+NAME: base-version
-#+BEGIN_EXAMPLE
-1.0.0
-#+END_EXAMPLE
+#+BEGIN_SRC text
+  1.0.0-alpha
+#+END_SRC
 ** Base
 Build the image 
 #+begin_src bash
@@ -17,20 +17,24 @@ docker push justinbarclay/gitpod-base:$version
 #+end_src
 
 Now update all the other dockerfiles to use the newest Docker version
-#+begin_src bash :var version=base-version
-sed -i 's/gitpod-base:[0-9]\+.[0-9]\+.[0-9]\+/gitpod-base:$base-version/g' ./**/Dockerfile
+#+begin_src bash :noweb yes
+sed -i "s/gitpod-base:[0-9]\+.[0-9]\+.[0-9]\+/gitpod-base:<<base-version>>/g" ./**/Dockerfile
 #+end_src
+
+#+RESULTS:
 
 ** Doom
 #+NAME: doom-version
 #+BEGIN_EXAMPLE
-1.0.0
+1.0.0-alpha-1
 #+END_EXAMPLE
 
 Update the version in the docker file
 #+begin_src bash
 docker build ./doom -t gitpod-doom
 #+end_src
+
+#+RESULTS:
 
 #+begin_src bash :var doom_version=doom-version :async
 docker tag gitpod-doom justinbarclay/gitpod-doom:$doom_version
@@ -57,12 +61,12 @@ docker push justinbarclay/gitpod-spacemacs:$spacemacs_version
 ** Default
 #+NAME: default-version
 #+BEGIN_EXAMPLE
-1.0.2-alpha-1
+1.0.2-alpha-2
 #+END_EXAMPLE
 
 #+begin_src bash :var spacemacs_version=spacemacs-version :var doom_version=doom-version 
-sed -i 's/yyoncho\/spacemacs:[0-9]\+.[0-9]\+.[0-9]\+/justinbarclay\/gitpod-spacemacs:$spacemacs_version/g' ./default/Dockerfile
-sed -i 's/yyoncho\/gitpod-doom:[0-9]\+.[0-9]\+.[0-9]\+/justinbarclay\/gitpod-doom:$doom_version/g' ./default/Dockerfile
+sed -i 's/gitpod-spacemacs:[0-9]\+.[0-9]\+.[0-9]\+/gitpod-spacemacs:$spacemacs_version/g' ./default/Dockerfile
+sed -i 's/gitpod-doom:[0-9]\+.[0-9]\+.[0-9]\+/gitpod-doom:$doom_version/g' ./default/Dockerfile
 #+end_src
 
 #+RESULTS:
@@ -77,4 +81,233 @@ docker build ./default -t gitpod-default
 docker tag gitpod-default justinbarclay/gitpod-default:$default_version
 docker push justinbarclay/gitpod-default:$default_version
 #+end_src
+
+#+RESULTS:
+| The            | push      | refers                                                                  | to     | repository | [docker.io/justinbarclay/gitpod-default] |
+| c345332572c4:  | Preparing |                                                                         |        |            |                                          |
+| d4889a1bbd1a:  | Preparing |                                                                         |        |            |                                          |
+| 9d11f3387fa9:  | Preparing |                                                                         |        |            |                                          |
+| 72d86303309a:  | Preparing |                                                                         |        |            |                                          |
+| 47aa11ac77d4:  | Preparing |                                                                         |        |            |                                          |
+| 2258eb255b8f:  | Preparing |                                                                         |        |            |                                          |
+| 4f3e2116dd5f:  | Preparing |                                                                         |        |            |                                          |
+| 2c5b7ae8a420:  | Preparing |                                                                         |        |            |                                          |
+| d5df7e84dfc2:  | Preparing |                                                                         |        |            |                                          |
+| 553736baa2c7:  | Preparing |                                                                         |        |            |                                          |
+| 014cfbdf72df:  | Preparing |                                                                         |        |            |                                          |
+| 86546d5124e8:  | Preparing |                                                                         |        |            |                                          |
+| 495a97a9a417:  | Preparing |                                                                         |        |            |                                          |
+| 7655ca6dec39:  | Preparing |                                                                         |        |            |                                          |
+| 677d63fd61ab:  | Preparing |                                                                         |        |            |                                          |
+| 6a41f4ef9ece:  | Preparing |                                                                         |        |            |                                          |
+| 5f70bf18a086:  | Preparing |                                                                         |        |            |                                          |
+| 5f70bf18a086:  | Preparing |                                                                         |        |            |                                          |
+| 8aae02570e88:  | Preparing |                                                                         |        |            |                                          |
+| 8c1d5a0c25cf:  | Preparing |                                                                         |        |            |                                          |
+| e583fe0f7b35:  | Preparing |                                                                         |        |            |                                          |
+| 82391fdd9bd1:  | Preparing |                                                                         |        |            |                                          |
+| 1abff5925135:  | Preparing |                                                                         |        |            |                                          |
+| 5f70bf18a086:  | Preparing |                                                                         |        |            |                                          |
+| eb5b648682ed:  | Preparing |                                                                         |        |            |                                          |
+| 4b2e63b31e4a:  | Preparing |                                                                         |        |            |                                          |
+| 5f70bf18a086:  | Preparing |                                                                         |        |            |                                          |
+| 5b8974b381d7:  | Preparing |                                                                         |        |            |                                          |
+| 256aae87931f:  | Preparing |                                                                         |        |            |                                          |
+| d9a6be1e2da9:  | Preparing |                                                                         |        |            |                                          |
+| 5d064a38ec24:  | Preparing |                                                                         |        |            |                                          |
+| 8d98a33803ed:  | Preparing |                                                                         |        |            |                                          |
+| fac6ae6fc159:  | Preparing |                                                                         |        |            |                                          |
+| b58ea24d0d16:  | Preparing |                                                                         |        |            |                                          |
+| 5f70bf18a086:  | Preparing |                                                                         |        |            |                                          |
+| 64e6a34e4638:  | Preparing |                                                                         |        |            |                                          |
+| 2258eb255b8f:  | Waiting   |                                                                         |        |            |                                          |
+| e389b6304a79:  | Preparing |                                                                         |        |            |                                          |
+| 1af74b3dc96f:  | Preparing |                                                                         |        |            |                                          |
+| 4f3e2116dd5f:  | Waiting   |                                                                         |        |            |                                          |
+| 785f739f5ac2:  | Preparing |                                                                         |        |            |                                          |
+| b1d2ecd714a3:  | Preparing |                                                                         |        |            |                                          |
+| 6fc20372fbeb:  | Preparing |                                                                         |        |            |                                          |
+| a551e190dc66:  | Preparing |                                                                         |        |            |                                          |
+| 2c5b7ae8a420:  | Waiting   |                                                                         |        |            |                                          |
+| 348eb0f81e26:  | Preparing |                                                                         |        |            |                                          |
+| 13b20bdc8396:  | Preparing |                                                                         |        |            |                                          |
+| a89ef148a909:  | Preparing |                                                                         |        |            |                                          |
+| d5df7e84dfc2:  | Waiting   |                                                                         |        |            |                                          |
+| 100c956fbd28:  | Preparing |                                                                         |        |            |                                          |
+| dfd473e39040:  | Preparing |                                                                         |        |            |                                          |
+| 97ac137ccf4e:  | Preparing |                                                                         |        |            |                                          |
+| 7a3f3d8744e4:  | Preparing |                                                                         |        |            |                                          |
+| 553736baa2c7:  | Waiting   |                                                                         |        |            |                                          |
+| b1542dcfb321:  | Preparing |                                                                         |        |            |                                          |
+| 716ae37dea94:  | Preparing |                                                                         |        |            |                                          |
+| f14a97fce699:  | Preparing |                                                                         |        |            |                                          |
+| 014cfbdf72df:  | Waiting   |                                                                         |        |            |                                          |
+| ff3f915d40bc:  | Preparing |                                                                         |        |            |                                          |
+| 2116456394b4:  | Preparing |                                                                         |        |            |                                          |
+| 4985c0104220:  | Preparing |                                                                         |        |            |                                          |
+| 86546d5124e8:  | Waiting   |                                                                         |        |            |                                          |
+| fc687f7246eb:  | Preparing |                                                                         |        |            |                                          |
+| 495a97a9a417:  | Waiting   |                                                                         |        |            |                                          |
+| 021f6c76f910:  | Preparing |                                                                         |        |            |                                          |
+| 7655ca6dec39:  | Waiting   |                                                                         |        |            |                                          |
+| 677d63fd61ab:  | Waiting   |                                                                         |        |            |                                          |
+| 8b2fdcc42eff:  | Preparing |                                                                         |        |            |                                          |
+| 6a41f4ef9ece:  | Waiting   |                                                                         |        |            |                                          |
+| b102e7041f7a:  | Preparing |                                                                         |        |            |                                          |
+| 5f70bf18a086:  | Waiting   |                                                                         |        |            |                                          |
+| abeec95c31d8:  | Preparing |                                                                         |        |            |                                          |
+| 8aae02570e88:  | Waiting   |                                                                         |        |            |                                          |
+| 15c0477b5636:  | Preparing |                                                                         |        |            |                                          |
+| 9fdc2a98bb1f:  | Preparing |                                                                         |        |            |                                          |
+| 8c1d5a0c25cf:  | Waiting   |                                                                         |        |            |                                          |
+| 0a33e092ac69:  | Preparing |                                                                         |        |            |                                          |
+| e583fe0f7b35:  | Waiting   |                                                                         |        |            |                                          |
+| 16be8d0e7011:  | Preparing |                                                                         |        |            |                                          |
+| 95bf5848a072:  | Preparing |                                                                         |        |            |                                          |
+| 5b8974b381d7:  | Waiting   |                                                                         |        |            |                                          |
+| eadcf613a7ea:  | Preparing |                                                                         |        |            |                                          |
+| b07cb3ff08ac:  | Preparing |                                                                         |        |            |                                          |
+| e445a443a921:  | Preparing |                                                                         |        |            |                                          |
+| 4225c2df1d4d:  | Preparing |                                                                         |        |            |                                          |
+| 5f70bf18a086:  | Preparing |                                                                         |        |            |                                          |
+| 12274ba3a903:  | Preparing |                                                                         |        |            |                                          |
+| 8928622e07e1:  | Preparing |                                                                         |        |            |                                          |
+| 256aae87931f:  | Waiting   |                                                                         |        |            |                                          |
+| b79540243cd6:  | Preparing |                                                                         |        |            |                                          |
+| ee717e656f09:  | Preparing |                                                                         |        |            |                                          |
+| 355a39b259f6:  | Preparing |                                                                         |        |            |                                          |
+| d9a6be1e2da9:  | Waiting   |                                                                         |        |            |                                          |
+| 92aba4706932:  | Preparing |                                                                         |        |            |                                          |
+| b9568c7424d8:  | Preparing |                                                                         |        |            |                                          |
+| 0b74b6ff022b:  | Preparing |                                                                         |        |            |                                          |
+| c2a08c27aedc:  | Preparing |                                                                         |        |            |                                          |
+| 5367f0d65a9c:  | Preparing |                                                                         |        |            |                                          |
+| b40ed86654e5:  | Preparing |                                                                         |        |            |                                          |
+| 1abff5925135:  | Waiting   |                                                                         |        |            |                                          |
+| 5d064a38ec24:  | Waiting   |                                                                         |        |            |                                          |
+| b1542dcfb321:  | Waiting   |                                                                         |        |            |                                          |
+| eb5b648682ed:  | Waiting   |                                                                         |        |            |                                          |
+| e389b6304a79:  | Waiting   |                                                                         |        |            |                                          |
+| 716ae37dea94:  | Waiting   |                                                                         |        |            |                                          |
+| 4b2e63b31e4a:  | Waiting   |                                                                         |        |            |                                          |
+| 6fc20372fbeb:  | Waiting   |                                                                         |        |            |                                          |
+| 8d98a33803ed:  | Waiting   |                                                                         |        |            |                                          |
+| f14a97fce699:  | Waiting   |                                                                         |        |            |                                          |
+| b1d2ecd714a3:  | Waiting   |                                                                         |        |            |                                          |
+| ff3f915d40bc:  | Waiting   |                                                                         |        |            |                                          |
+| 2116456394b4:  | Waiting   |                                                                         |        |            |                                          |
+| 4985c0104220:  | Waiting   |                                                                         |        |            |                                          |
+| 64e6a34e4638:  | Waiting   |                                                                         |        |            |                                          |
+| fc687f7246eb:  | Waiting   |                                                                         |        |            |                                          |
+| 12274ba3a903:  | Waiting   |                                                                         |        |            |                                          |
+| 0a33e092ac69:  | Waiting   |                                                                         |        |            |                                          |
+| 021f6c76f910:  | Waiting   |                                                                         |        |            |                                          |
+| fac6ae6fc159:  | Waiting   |                                                                         |        |            |                                          |
+| 16be8d0e7011:  | Waiting   |                                                                         |        |            |                                          |
+| a551e190dc66:  | Waiting   |                                                                         |        |            |                                          |
+| 348eb0f81e26:  | Waiting   |                                                                         |        |            |                                          |
+| 8b2fdcc42eff:  | Waiting   |                                                                         |        |            |                                          |
+| 13b20bdc8396:  | Waiting   |                                                                         |        |            |                                          |
+| b102e7041f7a:  | Waiting   |                                                                         |        |            |                                          |
+| a89ef148a909:  | Waiting   |                                                                         |        |            |                                          |
+| abeec95c31d8:  | Waiting   |                                                                         |        |            |                                          |
+| b58ea24d0d16:  | Waiting   |                                                                         |        |            |                                          |
+| eadcf613a7ea:  | Waiting   |                                                                         |        |            |                                          |
+| b07cb3ff08ac:  | Waiting   |                                                                         |        |            |                                          |
+| 0b74b6ff022b:  | Waiting   |                                                                         |        |            |                                          |
+| 8928622e07e1:  | Waiting   |                                                                         |        |            |                                          |
+| 355a39b259f6:  | Waiting   |                                                                         |        |            |                                          |
+| dfd473e39040:  | Waiting   |                                                                         |        |            |                                          |
+| 92aba4706932:  | Waiting   |                                                                         |        |            |                                          |
+| b79540243cd6:  | Waiting   |                                                                         |        |            |                                          |
+| b9568c7424d8:  | Waiting   |                                                                         |        |            |                                          |
+| e445a443a921:  | Waiting   |                                                                         |        |            |                                          |
+| b40ed86654e5:  | Waiting   |                                                                         |        |            |                                          |
+| 7a3f3d8744e4:  | Waiting   |                                                                         |        |            |                                          |
+| 4225c2df1d4d:  | Waiting   |                                                                         |        |            |                                          |
+| 97ac137ccf4e:  | Waiting   |                                                                         |        |            |                                          |
+| ee717e656f09:  | Waiting   |                                                                         |        |            |                                          |
+| 785f739f5ac2:  | Waiting   |                                                                         |        |            |                                          |
+| 100c956fbd28:  | Waiting   |                                                                         |        |            |                                          |
+| c2a08c27aedc:  | Waiting   |                                                                         |        |            |                                          |
+| 9fdc2a98bb1f:  | Waiting   |                                                                         |        |            |                                          |
+| 95bf5848a072:  | Waiting   |                                                                         |        |            |                                          |
+| 5367f0d65a9c:  | Waiting   |                                                                         |        |            |                                          |
+| c345332572c4:  | Layer     | already                                                                 | exists |            |                                          |
+| 72d86303309a:  | Layer     | already                                                                 | exists |            |                                          |
+| 9d11f3387fa9:  | Layer     | already                                                                 | exists |            |                                          |
+| d4889a1bbd1a:  | Layer     | already                                                                 | exists |            |                                          |
+| 47aa11ac77d4:  | Layer     | already                                                                 | exists |            |                                          |
+| 4f3e2116dd5f:  | Layer     | already                                                                 | exists |            |                                          |
+| 2258eb255b8f:  | Layer     | already                                                                 | exists |            |                                          |
+| 553736baa2c7:  | Layer     | already                                                                 | exists |            |                                          |
+| d5df7e84dfc2:  | Layer     | already                                                                 | exists |            |                                          |
+| 2c5b7ae8a420:  | Layer     | already                                                                 | exists |            |                                          |
+| 86546d5124e8:  | Layer     | already                                                                 | exists |            |                                          |
+| 7655ca6dec39:  | Layer     | already                                                                 | exists |            |                                          |
+| 495a97a9a417:  | Layer     | already                                                                 | exists |            |                                          |
+| 014cfbdf72df:  | Layer     | already                                                                 | exists |            |                                          |
+| 677d63fd61ab:  | Layer     | already                                                                 | exists |            |                                          |
+| 5f70bf18a086:  | Layer     | already                                                                 | exists |            |                                          |
+| 6a41f4ef9ece:  | Layer     | already                                                                 | exists |            |                                          |
+| 8aae02570e88:  | Layer     | already                                                                 | exists |            |                                          |
+| 8c1d5a0c25cf:  | Layer     | already                                                                 | exists |            |                                          |
+| e583fe0f7b35:  | Layer     | already                                                                 | exists |            |                                          |
+| 82391fdd9bd1:  | Layer     | already                                                                 | exists |            |                                          |
+| 1abff5925135:  | Layer     | already                                                                 | exists |            |                                          |
+| eb5b648682ed:  | Layer     | already                                                                 | exists |            |                                          |
+| 4b2e63b31e4a:  | Layer     | already                                                                 | exists |            |                                          |
+| 256aae87931f:  | Layer     | already                                                                 | exists |            |                                          |
+| 5b8974b381d7:  | Layer     | already                                                                 | exists |            |                                          |
+| d9a6be1e2da9:  | Layer     | already                                                                 | exists |            |                                          |
+| 5d064a38ec24:  | Layer     | already                                                                 | exists |            |                                          |
+| fac6ae6fc159:  | Layer     | already                                                                 | exists |            |                                          |
+| 8d98a33803ed:  | Layer     | already                                                                 | exists |            |                                          |
+| b58ea24d0d16:  | Layer     | already                                                                 | exists |            |                                          |
+| 64e6a34e4638:  | Layer     | already                                                                 | exists |            |                                          |
+| e389b6304a79:  | Layer     | already                                                                 | exists |            |                                          |
+| 1af74b3dc96f:  | Layer     | already                                                                 | exists |            |                                          |
+| b1d2ecd714a3:  | Layer     | already                                                                 | exists |            |                                          |
+| 785f739f5ac2:  | Layer     | already                                                                 | exists |            |                                          |
+| 6fc20372fbeb:  | Layer     | already                                                                 | exists |            |                                          |
+| a551e190dc66:  | Layer     | already                                                                 | exists |            |                                          |
+| 13b20bdc8396:  | Layer     | already                                                                 | exists |            |                                          |
+| a89ef148a909:  | Layer     | already                                                                 | exists |            |                                          |
+| 348eb0f81e26:  | Layer     | already                                                                 | exists |            |                                          |
+| 100c956fbd28:  | Layer     | already                                                                 | exists |            |                                          |
+| dfd473e39040:  | Layer     | already                                                                 | exists |            |                                          |
+| 7a3f3d8744e4:  | Layer     | already                                                                 | exists |            |                                          |
+| 97ac137ccf4e:  | Layer     | already                                                                 | exists |            |                                          |
+| b1542dcfb321:  | Layer     | already                                                                 | exists |            |                                          |
+| 716ae37dea94:  | Layer     | already                                                                 | exists |            |                                          |
+| f14a97fce699:  | Layer     | already                                                                 | exists |            |                                          |
+| 4985c0104220:  | Layer     | already                                                                 | exists |            |                                          |
+| ff3f915d40bc:  | Layer     | already                                                                 | exists |            |                                          |
+| 2116456394b4:  | Layer     | already                                                                 | exists |            |                                          |
+| fc687f7246eb:  | Layer     | already                                                                 | exists |            |                                          |
+| 8b2fdcc42eff:  | Layer     | already                                                                 | exists |            |                                          |
+| 021f6c76f910:  | Layer     | already                                                                 | exists |            |                                          |
+| b102e7041f7a:  | Layer     | already                                                                 | exists |            |                                          |
+| abeec95c31d8:  | Layer     | already                                                                 | exists |            |                                          |
+| 9fdc2a98bb1f:  | Layer     | already                                                                 | exists |            |                                          |
+| 15c0477b5636:  | Layer     | already                                                                 | exists |            |                                          |
+| 0a33e092ac69:  | Layer     | already                                                                 | exists |            |                                          |
+| 16be8d0e7011:  | Layer     | already                                                                 | exists |            |                                          |
+| 95bf5848a072:  | Layer     | already                                                                 | exists |            |                                          |
+| eadcf613a7ea:  | Layer     | already                                                                 | exists |            |                                          |
+| e445a443a921:  | Layer     | already                                                                 | exists |            |                                          |
+| b07cb3ff08ac:  | Layer     | already                                                                 | exists |            |                                          |
+| 4225c2df1d4d:  | Layer     | already                                                                 | exists |            |                                          |
+| 12274ba3a903:  | Layer     | already                                                                 | exists |            |                                          |
+| 8928622e07e1:  | Layer     | already                                                                 | exists |            |                                          |
+| ee717e656f09:  | Layer     | already                                                                 | exists |            |                                          |
+| b79540243cd6:  | Layer     | already                                                                 | exists |            |                                          |
+| 355a39b259f6:  | Layer     | already                                                                 | exists |            |                                          |
+| 92aba4706932:  | Layer     | already                                                                 | exists |            |                                          |
+| b9568c7424d8:  | Layer     | already                                                                 | exists |            |                                          |
+| 0b74b6ff022b:  | Layer     | already                                                                 | exists |            |                                          |
+| c2a08c27aedc:  | Layer     | already                                                                 | exists |            |                                          |
+| b40ed86654e5:  | Layer     | already                                                                 | exists |            |                                          |
+| 5367f0d65a9c:  | Layer     | already                                                                 | exists |            |                                          |
+| 1.0.2-alpha-2: | digest:   | sha256:d9d9e88bdc875c59e6547bcaeb53d067c363eb29473910fa36600fab460be9af | size:  |      17301 |                                          |
 
